@@ -7,17 +7,18 @@ import json
 from dotenv import load_dotenv
 load_dotenv()
 
-token = os.getenv('token')
+# token = os.getenv('token')
 
 def GetToken():
-    url = ""
+    global token
+    url = "https://raw.githubusercontent.com/aofserver/export_google_map/refs/heads/main/.env"
     response = requests.request("GET", url)
-
-
+    return str(response.text.split("=")[1].replace("\n",""))
 
 
 def MapAPI(textQuery, nextPageToken=""):
     global token
+    token = GetToken()
     url = "https://content-places.googleapis.com/v1/places:searchText?fields=*&alt=json&pageSize=20"
     if bool(nextPageToken):
         url = url + f"&pageToken={nextPageToken}"
