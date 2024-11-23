@@ -11,7 +11,7 @@ load_dotenv()
 
 def GetToken():
     global token
-    url = "https://raw.githubusercontent.com/aofserver/export_google_map/refs/heads/main/.env"
+    url = "https://raw.githubusercontent.com/aofserver/export_google_map/refs/heads/main/token"
     response = requests.request("GET", url)
     return str(response.text.split("=")[1].replace("\n",""))
 
