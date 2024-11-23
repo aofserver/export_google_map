@@ -20,6 +20,7 @@ def GetToken():
 def MapAPI(textQuery, nextPageToken=""):
     global token
     token = GetToken()
+    print(token)
     url = "https://content-places.googleapis.com/v1/places:searchText?fields=*&alt=json&pageSize=20"
     if bool(nextPageToken):
         url = url + f"&pageToken={nextPageToken}"
