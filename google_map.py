@@ -27,27 +27,9 @@ def MapAPI(textQuery, nextPageToken=""):
         "textQuery": textQuery
     })
     headers = {
-        'accept': '*/*',
-        'accept-language': 'th-TH,th;q=0.9,en-US;q=0.8,en;q=0.7',
+        'accept': 'application/json',
         'authorization': 'Bearer ' + token,
-        'content-type': 'application/json',
-        'origin': 'https://content-places.googleapis.com',
-        'priority': 'u=1, i',
-        'referer': 'https://content-places.googleapis.com/static/proxy.html?usegapi=1&jsh=m%3B%2F_%2Fscs%2Fabc-static%2F_%2Fjs%2Fk%3Dgapi.lb.th.44uDDJ66DBs.O%2Fam%3DAACA%2Fd%3D1%2Frs%3DAHpOoo_1t22RprkAiUJsA6uts_cGae0afg%2Fm%3D__features__',
-        'sec-ch-ua': '"Chromium";v="130", "Google Chrome";v="130", "Not?A_Brand";v="99"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"macOS"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
-        'x-client-data': 'CKO1yQEIk7bJAQimtskBCKmdygEIt5LLAQiWocsBCIagzQEIusjNAQjVrM4BCPq+zgEIo8TOAQiTxs4BCJfLzgEIw8zOAQjGzM4BGPXJzQEYnbHOARj/yc4B',
-        'x-clientdetails': 'appVersion=5.0%20(Macintosh%3B%20Intel%20Mac%20OS%20X%2010_15_7)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F130.0.0.0%20Safari%2F537.36&platform=MacIntel&userAgent=Mozilla%2F5.0%20(Macintosh%3B%20Intel%20Mac%20OS%20X%2010_15_7)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F130.0.0.0%20Safari%2F537.36',
-        'x-goog-encode-response-if-executable': 'base64',
-        'x-javascript-user-agent': 'apix/3.0.0 google-api-javascript-client/1.1.0',
-        'x-origin': 'https://explorer.apis.google.com',
-        'x-referer': 'https://explorer.apis.google.com',
-        'x-requested-with': 'XMLHttpRequest'
+        'content-type': 'application/json'
     }
 
     response = requests.request("POST", url, headers=headers, data=payload)
