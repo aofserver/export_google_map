@@ -13,7 +13,7 @@ def GetToken():
     global token
     url = "https://raw.githubusercontent.com/aofserver/export_google_map/refs/heads/main/token.txt"
     response = requests.request("GET", url)
-    return str(response.text.split("=")[1].replace("\n",""))
+    return str(response.text.replace("\n",""))
 
 
 def MapAPI(textQuery, nextPageToken=""):
