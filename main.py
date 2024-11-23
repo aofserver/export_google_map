@@ -37,7 +37,7 @@ for id_k, k in enumerate(keyword):
     if os.getenv('province_id'):
       if p["id"] != int(os.getenv('province_id')):
         continue
-    print("...",f"{id_p+1}/{len_filtered_provinces}", p["name_th"], p["id"])
+    print("...",f"{id_p+1}/{len_filtered_provinces}", p["name_th"], id_k)
     filtered_amphures = [amphure for amphure in amphures if amphure["province_id"] == p["id"]]
     len_filtered_amphures = len(filtered_amphures)
     for id_a, a in enumerate(filtered_amphures):
