@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   test_job:
     container_name: test_job
