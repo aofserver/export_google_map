@@ -2,6 +2,7 @@
 # ref : https://developers.google.com/maps/billing-and-pricing/pricing?hl=th#id-textsearch
 
 import os
+import time
 import requests
 import json
 from dotenv import load_dotenv
@@ -34,10 +35,22 @@ def MapAPI(textQuery, nextPageToken=""):
 
     response = requests.request("POST", url, headers=headers, data=payload)
     if response.status_code == 200:
-      response = response.json()
-      return response.get("places"), response.get("nextPageToken")
+        response = response.json()
+        return response.get("places"), response.get("nextPageToken")
     else:
-      print("[ERROR AUTH]")
+        print("[ERROR AUTH]")
+
+        # send noti
+        url = "https://notify-api.line.me/api/notify"
+        payload = 'message=Token%20%E0%B8%AB%E0%B8%A1%E0%B8%94%E0%B8%AD%E0%B8%B2%E0%B8%A2%E0%B8%B8'
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Bearer FkVn9bJSz3OeZL4R9O189FLS7xd1sLNeUmb2XRh25r1'
+        }
+        response = requests.request("POST", url, headers=headers, data=payload)
+
+        time.sleep(60)
+        MapAPI(textQuery, nextPageToken)
 
 def QueryGoogleMap(textQuery):
     result = []
