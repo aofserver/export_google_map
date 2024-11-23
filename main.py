@@ -61,4 +61,4 @@ for id_k, k in enumerate(keyword):
       with open(f"output/K{id_k}_{p['id']}_{a['id']}.json", "w", encoding='utf-8') as f:
         json.dump(output_all, f, ensure_ascii=False, indent=4)
 
-    summary_file.Save()
+    # summary_file.Save()
