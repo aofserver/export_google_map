@@ -17,8 +17,6 @@ with open('provinces-th/tambons.json', 'r') as file:
     tambons = json.load(file)
     tambons = sorted(tambons, key=lambda x: x['id'])
 
-output_data = []
-output_all = []
 keyword = [
     "อู่เปลี่ยนถ่ายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "ร้านขายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
@@ -33,6 +31,7 @@ keyword = [
     "สถานีบริการน้ำมันใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
 ]
 for id_k, k in enumerate(keyword):
+  output_all = []
   len_filtered_provinces = len(provinces)
   for id_p, p in enumerate(provinces):
     if os.getenv('province_id'):
