@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  test_p${port}_job:
-    container_name: test_p${port}_job
-    image: test_p${port}_job_img
+  test_job:
+    container_name: test_job
+    image: test_job_img
     env_file:
       - .env
     build:
