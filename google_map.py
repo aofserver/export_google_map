@@ -49,7 +49,7 @@ def MapAPI(textQuery, nextPageToken=""):
         }
         response = requests.request("POST", url, headers=headers, data=payload)
 
-        time.sleep(60)
+        time.sleep(600)
         MapAPI(textQuery, nextPageToken)
 
 def QueryGoogleMap(textQuery):
