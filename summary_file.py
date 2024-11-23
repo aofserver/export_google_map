@@ -14,7 +14,7 @@ def Save():
 
     list_file = os.listdir("output")
     for filename in list_file:
-        if Path(filename).suffix != ".json" and filename != "data.json":
+        if Path(filename).suffix != ".json" and filename == "data.json":
             continue
         with open(f'output/{filename}', 'r') as file:
             data_all = json.load(file)
@@ -22,8 +22,8 @@ def Save():
             check = [r for r in result if r["id"] == data["id"]]
             if not check:
                 result.append(data)
-        print(f'Remove output/{filename}')
-        os.remove(f'output/{filename}')
+        if Path(filename).suffix == ".json" and filename != "data.json":
+            os.remove(f'output/{filename}')
 
     # write json file
     with open(f"output/data.json", "w", encoding='utf-8') as f:
