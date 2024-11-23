@@ -11,3 +11,9 @@ services:
     volumes:
       - /root/projects/test:/app/output
 
+networks:
+  default:
+    external: true
+    name: reverse-proxy
+
+
