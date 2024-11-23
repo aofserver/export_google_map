@@ -50,7 +50,8 @@ def MapAPI(textQuery, nextPageToken=""):
         response = requests.request("POST", url, headers=headers, data=payload)
 
         time.sleep(600)
-        MapAPI(textQuery, nextPageToken)
+        p, n = MapAPI(textQuery, nextPageToken)
+        return p, n
 
 def QueryGoogleMap(textQuery):
     result = []
