@@ -18,38 +18,53 @@ with open('provinces-th/tambons.json', 'r') as file:
     tambons = json.load(file)
     tambons = sorted(tambons, key=lambda x: x['id'])
 
-keyword = [
-    "อู่เปลี่ยนถ่ายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "ร้านขายเครื่องมือและอุปกรณ์การเกษตรใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "ร้านขายอะไหล่รถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "ศูนย์ซ่อมรถยนต์และรถบรรทุกใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "อู่เปลี่ยนถ่ายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+# keyword = [
+#     "อู่เปลี่ยนถ่ายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+#     "ร้านขายเครื่องมือและอุปกรณ์การเกษตรใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+#     "ร้านขายอะไหล่รถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+#     "ศูนย์ซ่อมรถยนต์และรถบรรทุกใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+#     "อู่เปลี่ยนถ่ายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     
-    "ร้านขายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "ร้านขายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+#     "ร้านขายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+#     "ร้านขายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+#     "ร้านซ่อมจักรยานยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+#     "อู่ซ่อมรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}"
+# ]
+
+keyword = [
+    # "อู่เปลี่ยนถ่ายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    # "ร้านขายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    # "ร้านขายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    # "อู่เปลี่ยนถ่ายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    # "อู่เปลี่ยนถ่ายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "ร้านซ่อมจักรยานยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "อู่ซ่อมรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}"
+    "ร้านขายเครื่องมือและอุปกรณ์การเกษตรใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    "ศูนย์ซ่อมรถยนต์และรถบรรทุกใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    "อู่ซ่อมรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    "ร้านขายอะไหล่รถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}"
 ]
 
 output_all = []
 for id_k, k in enumerate(keyword):
+  if os.getenv('keyword_id'):
+    if id_k != int(os.getenv('keyword_id',"0")):
+      continue
   len_filtered_provinces = len(provinces)
   for id_p, p in enumerate(provinces):
-    if os.getenv('province_id'):
-      if p["id"] != int(os.getenv('province_id')):
-        continue
+    if p["id"] != int(os.getenv('province_id',"0")):
+      continue
     print("...",f"{id_p+1}/{len_filtered_provinces}", p["name_th"], p["id"], id_k)
     filtered_amphures = [amphure for amphure in amphures if amphure["province_id"] == p["id"]]
     len_filtered_amphures = len(filtered_amphures)
     for id_a, a in enumerate(filtered_amphures):
-      if id_a < int(os.getenv('amphure_id')):
+      if id_a < int(os.getenv('amphure_id',"0")):
         continue
       print(".....",f"{id_a+1}/{len_filtered_amphures}", a["name_th"], a["id"])
       filtered_tambons = [tambon for tambon in tambons if tambon["amphure_id"] == a["id"]]
       len_filtered_tambons = len(filtered_tambons)
       for id_t, t in enumerate(filtered_tambons):
-        if id_t < int(os.getenv('tambon_id')):
-          continue
+        # if id_t < int(os.getenv('tambon_id',"0")):
+        #   continue
         print("........",f"{id_t+1}/{len_filtered_tambons}", t["name_th"], t["id"])
         textQuery = k.format(province=p["name_th"], amphure=a["name_th"], tambon=t["name_th"])
         result = google_map.QueryGoogleMap(textQuery)
