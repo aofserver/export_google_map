@@ -47,7 +47,7 @@ keyword = [
 output_all = []
 for id_k, k in enumerate(keyword):
   if os.getenv('keyword_id'):
-    if id_k != int(os.getenv('keyword_id',"0")):
+    if id_k > int(os.getenv('keyword_id',"0")):
       continue
   len_filtered_provinces = len(provinces)
   for id_p, p in enumerate(provinces):
