@@ -38,7 +38,7 @@ keyword = [
     # "อู่เปลี่ยนถ่ายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     # "อู่เปลี่ยนถ่ายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     # "ร้านซ่อมจักรยานยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "ร้านขายเครื่องมือและอุปกรณ์การเกษตรใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    # "ร้านขายเครื่องมือและอุปกรณ์การเกษตรใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "ศูนย์ซ่อมรถยนต์และรถบรรทุกใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "อู่ซ่อมรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "ร้านขายอะไหล่รถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}"
@@ -53,9 +53,8 @@ if os.path.isfile(path):
     output_all = json.load(file)
 
 for id_k, k in enumerate(keyword):
-  if os.getenv('keyword_id'):
-    if id_k > int(os.getenv('keyword_id',"0")):
-      continue
+  # if id_k > int(os.getenv('keyword_id',"0")):
+  #   continue
   len_filtered_provinces = len(provinces)
   for id_p, p in enumerate(provinces):
     if p["id"] != int(os.getenv('province_id',"0")):
