@@ -50,6 +50,21 @@ for r in result:
         closeTime = ""
     addressSubdistrict = FindAddress(["locality","sublocality_level_1"],r.get("addressComponents"))
     addressDistrict = FindAddress(["administrative_area_level_2"],r.get("addressComponents"))
+
+    list_k = r.get("formattedAddress").split(",")
+    for k in list_k:
+        if "Khet" in k:
+            kk = k.strip().split("Khet")
+            if len(kk) > 1:
+                addressSubdistrict = "Khet "+ kk[-1].strip()
+            else:
+                addressSubdistrict = k.strip()
+        elif "Khwaeng" in k:
+            kk = k.strip().split("Khwaeng")
+            if len(kk) > 1:
+                addressDistrict = "Khwaeng "+ kk[-1].strip()
+            else:
+                addressDistrict = k.strip()
     addressProvince = FindAddress(["administrative_area_level_1"],r.get("addressComponents"))
     addressCountry = FindAddress("country",r.get("addressComponents"))
     addressZipcode = FindAddress("postal_code",r.get("addressComponents"))
@@ -83,7 +98,8 @@ for r in result:
         "ประเทศ": addressCountry,
         "รหัสไปรษณี": addressZipcode,
     }
-    if "bangkok" in addressProvince.lower() or "nakhon" in addressProvince.lower() or "กรุงเทพ" in addressProvince.lower():
+    if "bangkok" in addressProvince.lower() or "maha nakhon" in addressProvince.lower() or "กรุงเทพ" in addressProvince.lower():
+        data["จังหวัด"] = "กรุงเทพมหานคร"
         excel_data.append(data)
 
 

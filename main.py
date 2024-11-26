@@ -37,14 +37,21 @@ keyword = [
     # "ร้านขายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     # "อู่เปลี่ยนถ่ายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     # "อู่เปลี่ยนถ่ายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "ร้านซ่อมจักรยานยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    # "ร้านซ่อมจักรยานยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "ร้านขายเครื่องมือและอุปกรณ์การเกษตรใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "ศูนย์ซ่อมรถยนต์และรถบรรทุกใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "อู่ซ่อมรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "ร้านขายอะไหล่รถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}"
 ]
 
+
 output_all = []
+folder = "output"
+path = f'{folder}/data.json'
+if os.path.isfile(path):
+  with open(path, 'r') as file:
+    output_all = json.load(file)
+
 for id_k, k in enumerate(keyword):
   if os.getenv('keyword_id'):
     if id_k > int(os.getenv('keyword_id',"0")):
