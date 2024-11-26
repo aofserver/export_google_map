@@ -30,8 +30,9 @@ keyword = [
     "อู่ซ่อมรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "ร้านขายอะไหล่รถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}"
 ]
+
+output_all = []
 for id_k, k in enumerate(keyword):
-  output_all = []
   len_filtered_provinces = len(provinces)
   for id_p, p in enumerate(provinces):
     if os.getenv('province_id'):
