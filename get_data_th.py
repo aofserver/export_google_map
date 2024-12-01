@@ -49,7 +49,9 @@ for filename in list_file:
     with open(f'output/{filename}', 'r') as file:
         print(f"read file {filename}")
         data_all = json.load(file)
-    for data in list(data_all):
+    data_len = len(data_all)
+    for id, data in enumerate(list(data_all)):
+        print(f"..... {id+1}/{data_len}", data["id"], filename)
         r = GetGmap(data["id"])
         result.append(r)
     with open(f"output/{filename.replace('P','T')}", "w", encoding='utf-8') as f:
