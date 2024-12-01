@@ -27,6 +27,7 @@ def GetGmap(id):
         return response
     else:
         print("[ERROR AUTH]")
+        print(response.json())
         # send noti
         url = "https://notify-api.line.me/api/notify"
         payload = 'message=Token%20%E0%B8%AB%E0%B8%A1%E0%B8%94%E0%B8%AD%E0%B8%B2%E0%B8%A2%E0%B8%B8'
