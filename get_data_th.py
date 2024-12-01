@@ -49,9 +49,12 @@ for filename in list_file:
     with open(f'output/{filename}', 'r') as file:
         print(f"read file {filename}")
         data_all = json.load(file)
-    data_len = len(data_all)
+    data_len = len(data_all) - 1
     for id, data in enumerate(list(data_all)):
-        print(f"..... {id+1}/{data_len}", data["id"], filename)
+        province_id = int(filename.replace("P","").split(".")[0])
+        if province_id < int(os.getenv('province_id',"0")):
+            continue
+        print(f"..... {id}/{data_len}", data["id"], filename)
         r = GetGmap(data["id"])
         result.append(r)
     with open(f"output/{filename.replace('P','T')}", "w", encoding='utf-8') as f:
