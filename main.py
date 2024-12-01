@@ -21,7 +21,7 @@ with open('provinces-th/tambons.json', 'r') as file:
 keyword = [
     # "อู่เปลี่ยนถ่ายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     # "ร้านขายเครื่องมือและอุปกรณ์การเกษตรใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    # "ร้านขายอะไหล่รถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    "ร้านขายอะไหล่รถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "ศูนย์ซ่อมรถยนต์และรถบรรทุกใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "อู่เปลี่ยนถ่ายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     
