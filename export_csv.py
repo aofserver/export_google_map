@@ -84,8 +84,8 @@ for r in result:
         "ประเทศ": addressCountry,
         "รหัสไปรษณี": addressZipcode,
     }
-    if "นครนายก" in addressProvince:
-        excel_data.append(data)
+
+    excel_data.append(data)
 
 # write file csv
 data_file = open('data.csv', 'w')

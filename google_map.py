@@ -8,30 +8,27 @@ import json
 from dotenv import load_dotenv
 load_dotenv()
 
-# token = os.getenv('token')
-
-def GetToken():
-    global token
-    url = "https://raw.githubusercontent.com/aofserver/export_google_map/refs/heads/main/token.txt"
-    response = requests.request("GET", url)
-    return str(response.text.replace("\n",""))
-
 
 def MapAPI(textQuery, nextPageToken=""):
-    global token
-    token = GetToken()
-    url = "https://content-places.googleapis.com/v1/places:searchText?fields=*&alt=json&pageSize=20"
+    api_key = os.getenv('api_key')
+    access_token = os.getenv('access_token')
+
+    url = "https://content-places.googleapis.com/v1/places:searchText?alt=json&pageSize=20"
     if bool(nextPageToken):
         url = url + f"&pageToken={nextPageToken}"
 
-    payload = json.dumps({
-        "textQuery": textQuery
-    })
+    payload = json.dumps({ "textQuery": textQuery })
     headers = {
         'accept': 'application/json',
-        'authorization': 'Bearer ' + token,
         'content-type': 'application/json'
     }
+    
+    if access_token:
+        url = url + "&fields=places.id,places.name,places.types,places.nationalPhoneNumber,places.formattedAddress,places.addressComponents,places.viewport,places.rating,places.googleMapsUri,places.regularOpeningHours,places.userRatingCount,places.displayName,places.shortFormattedAddress,places.googleMapsLinks,places.primaryTypeDisplayName,places.primaryType,nextPageToken,searchUri"
+        headers["authorization"] = 'Bearer ' + access_token
+    elif api_key:
+        headers["X-Goog-Api-Key"] = api_key
+        headers["X-Goog-FieldMask"] = 'places.id,places.name,places.types,places.nationalPhoneNumber,places.formattedAddress,places.addressComponents,places.viewport,places.rating,places.googleMapsUri,places.regularOpeningHours,places.userRatingCount,places.displayName,places.shortFormattedAddress,places.googleMapsLinks,places.primaryTypeDisplayName,places.primaryType,nextPageToken,searchUri'
 
     response = requests.request("POST", url, headers=headers, data=payload)
     if response.status_code == 200:
@@ -60,6 +57,13 @@ def QueryGoogleMap(textQuery):
         places, nextPageToken = MapAPI(textQuery, nextPageToken)
         if not bool(places):
           break
+        for p in places:
+            if p.get("reviews"):
+                del p["reviews"]
+            if p.get("photos"):
+                del p["photos"]
+            if p.get("addressDescriptor"):
+                del p["addressDescriptor"]
         result.extend(places)
         if nextPageToken is None:
             break
