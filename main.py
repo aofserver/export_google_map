@@ -35,7 +35,7 @@ keyword = [
 for id_p, p in enumerate(provinces):
   output_all = []
   folder = "output"
-  path = f'{folder}/P{p['id']}.json'
+  path = f"{folder}/P{p['id']}.json"
   if os.path.isfile(path):
     with open(path, 'r') as file:
       output_all = json.load(file)
