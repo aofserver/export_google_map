@@ -19,10 +19,10 @@ with open('provinces-th/tambons.json', 'r') as file:
     tambons = sorted(tambons, key=lambda x: x['id'])
 
 keyword = [
-    "อู่เปลี่ยนถ่ายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "ร้านขายเครื่องมือและอุปกรณ์การเกษตรใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "ร้านขายอะไหล่รถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
-    "ศูนย์ซ่อมรถยนต์และรถบรรทุกใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    # "อู่เปลี่ยนถ่ายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    # "ร้านขายเครื่องมือและอุปกรณ์การเกษตรใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    # "ร้านขายอะไหล่รถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
+    # "ศูนย์ซ่อมรถยนต์และรถบรรทุกใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     "อู่เปลี่ยนถ่ายน้ำมันเครื่องมอเตอร์ไซค์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
     
     # "ร้านขายน้ำมันเครื่องรถยนต์ใน จังหวัด{province} อำเภอ{amphure} ตำบล{tambon}",
@@ -39,7 +39,7 @@ for id_p, p in enumerate(provinces):
   if os.path.isfile(path):
     with open(path, 'r') as file:
       output_all = json.load(file)
-  if p["id"] < int(os.getenv('province_id',"0")) or p["id"] > int(os.getenv('province_id',"0")) + int(os.getenv('province_number',"0")):
+  if p["id"] != int(os.getenv('province_id',"0")):
     continue
   filtered_amphures = [amphure for amphure in amphures if amphure["province_id"] == p["id"]]
   len_filtered_amphures = len(filtered_amphures)
