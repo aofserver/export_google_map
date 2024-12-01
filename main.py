@@ -32,21 +32,19 @@ keyword = [
 ]
 
 
-output_all = []
-# folder = "output"
-# path = f'{folder}/data.json'
-# if os.path.isfile(path):
-#   with open(path, 'r') as file:
-#     output_all = json.load(file)
-
-for id_k, k in enumerate(keyword):
-  len_filtered_provinces = len(provinces)
-  for id_p, p in enumerate(provinces):
-    if p["id"] != int(os.getenv('province_id',"0")):
-      continue
-    print("...",f"{id_p+1}/{len_filtered_provinces}", p["name_th"], p["id"], id_k)
-    filtered_amphures = [amphure for amphure in amphures if amphure["province_id"] == p["id"]]
-    len_filtered_amphures = len(filtered_amphures)
+for id_p, p in enumerate(provinces):
+  output_all = []
+  folder = "output"
+  path = f'{folder}/P{p['id']}.json'
+  if os.path.isfile(path):
+    with open(path, 'r') as file:
+      output_all = json.load(file)
+  if p["id"] < int(os.getenv('province_id',"0")) or p["id"] > int(os.getenv('province_id',"0")) + int(os.getenv('province_number',"0")):
+    continue
+  filtered_amphures = [amphure for amphure in amphures if amphure["province_id"] == p["id"]]
+  len_filtered_amphures = len(filtered_amphures)
+  for id_k, k in enumerate(keyword):
+    print("...",f"{id_p+1}/{len(provinces)}", p["name_th"], p["id"], id_k)
     for id_a, a in enumerate(filtered_amphures):
       print(".....",f"{id_a+1}/{len_filtered_amphures}", a["name_th"], a["id"])
       filtered_tambons = [tambon for tambon in tambons if tambon["amphure_id"] == a["id"]]
