@@ -1,5 +1,6 @@
 # ref : https://developers.google.com/maps/documentation/places/web-service/text-search?hl=th&apix_params=%7B%22fields%22%3A%22*%22%2C%22resource%22%3A%7B%22textQuery%22%3A%22%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%8B%E0%B9%88%E0%B8%AD%E0%B8%A1%E0%B8%A3%E0%B8%96%E0%B9%83%E0%B8%99%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%97%E0%B8%A8%E0%B9%84%E0%B8%97%E0%B8%A2%22%7D%7D
 # ref : https://developers.google.com/maps/billing-and-pricing/pricing?hl=th#id-textsearch
+# ref : https://console.cloud.google.com/apis/library/places.googleapis.com
 
 import os
 import time
@@ -9,9 +10,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+def GetToken():
+    url = "https://raw.githubusercontent.com/aofserver/export_google_map/refs/heads/main/token.txt"
+    response = requests.request("GET", url)
+    return str(response.text.replace("\n",""))
+
+
 def MapAPI(textQuery, nextPageToken=""):
     api_key = os.getenv('api_key')
-    access_token = os.getenv('access_token')
+    # access_token = os.getenv('access_token')
+    access_token = GetToken()
 
     url = "https://content-places.googleapis.com/v1/places:searchText?alt=json&pageSize=20"
     if bool(nextPageToken):
@@ -36,7 +44,6 @@ def MapAPI(textQuery, nextPageToken=""):
         return response.get("places"), response.get("nextPageToken")
     else:
         print("[ERROR AUTH]")
-
         # send noti
         url = "https://notify-api.line.me/api/notify"
         payload = 'message=Token%20%E0%B8%AB%E0%B8%A1%E0%B8%94%E0%B8%AD%E0%B8%B2%E0%B8%A2%E0%B8%B8'
