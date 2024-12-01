@@ -39,7 +39,7 @@ for id_p, p in enumerate(provinces):
   if os.path.isfile(path):
     with open(path, 'r') as file:
       output_all = json.load(file)
-  if p["id"] < int(os.getenv('province_id',"0")) or p["id"] > int(os.getenv('province_id',"0")) + int(os.getenv('province_number',"0")):
+  if p["id"] != int(os.getenv('province_id',"0")):
     continue
   filtered_amphures = [amphure for amphure in amphures if amphure["province_id"] == p["id"]]
   len_filtered_amphures = len(filtered_amphures)
