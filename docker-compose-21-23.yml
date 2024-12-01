@@ -1,0 +1,18 @@
+services:
+  test_job_21_23:
+    container_name: test_job_21_23
+    image: test_job_img
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /root/projects/test:/app/output
+
+networks:
+  default:
+    external: true
+    name: reverse-proxy
+
+
