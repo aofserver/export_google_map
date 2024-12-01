@@ -4,10 +4,11 @@ import time
 import csv
 import requests
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 list_file = os.listdir("output")
 list_file = sorted(list_file, key=lambda x: int(x[1:-5]))
-
 
 def GetToken():
     url = "https://raw.githubusercontent.com/aofserver/export_google_map/refs/heads/main/token.txt"
@@ -45,14 +46,23 @@ def GetGmap(id):
 for filename in list_file:
     if Path(filename).suffix != ".json" or filename[0] != "P":
         continue
+    province_id = int(filename.replace("P","").split(".")[0])
+    if province_id < int(os.getenv('province_id',"0")) or province_id > int(os.getenv('province_id',"0"))+int(os.getenv('province_number',"0")):
+        continue
+
     result = []
+    if os.getenv('record_id'):
+        path = f"output/{filename.replace('P','T')}"
+        if os.path.isfile(path):
+            with open(path, 'r') as file:
+                result = json.load(file)
+
     with open(f'output/{filename}', 'r') as file:
         print(f"read file {filename}")
         data_all = json.load(file)
     data_len = len(data_all) - 1
     for id, data in enumerate(list(data_all)):
-        province_id = int(filename.replace("P","").split(".")[0])
-        if province_id < int(os.getenv('province_id',"0")):
+        if id < int(os.getenv('record_id',"0")):
             continue
         print(f"..... {id}/{data_len}", data["id"], filename)
         r = GetGmap(data["id"])
