@@ -64,6 +64,9 @@ for filename in list_file:
     for id, data in enumerate(list(data_all)):
         if id < int(os.getenv('record_id',"0")):
             continue
+        if id%500 == 0:
+            with open(f"output/{filename.replace('P','T')}", "w", encoding='utf-8') as f:
+                json.dump(result, f, ensure_ascii=False, indent=4)
         print(f"..... {id}/{data_len}", data["id"], filename)
         r = GetGmap(data["id"])
         result.append(r)
