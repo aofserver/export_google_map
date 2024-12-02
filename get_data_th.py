@@ -26,6 +26,8 @@ def GetGmap(id):
     if response.status_code == 200:
         response = response.json()
         return response
+    if response.status_code == 404:
+        return
     else:
         print("[ERROR AUTH]")
         print(response.json())
@@ -38,7 +40,7 @@ def GetGmap(id):
         }
         response = requests.request("POST", url, headers=headers, data=payload)
 
-        time.sleep(600)
+        time.sleep(60)
         r = GetGmap(id)
         return r
 
@@ -69,7 +71,8 @@ for filename in list_file:
                 json.dump(result, f, ensure_ascii=False, indent=4)
         print(f"..... {id}/{data_len}", data["id"], filename)
         r = GetGmap(data["id"])
-        result.append(r)
+        if r:
+            result.append(r)
     with open(f"output/{filename.replace('P','T')}", "w", encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=4)
     
